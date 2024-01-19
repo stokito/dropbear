@@ -736,6 +736,7 @@ enable_pam
 enable_openpty
 enable_syslog
 enable_shadow
+enable_genhostkeys
 enable_plugin
 enable_fuzz
 enable_bundled_libtom
@@ -1391,6 +1392,7 @@ Optional Features:
   --disable-openpty       Don't use openpty, use alternative method
   --disable-syslog        Don't include syslog support
   --disable-shadow        Don't use shadow passwords (if available)
+  --disable-genhostkeys        Don't include hostkey auto generation e.g. -R option
   --enable-plugin         Enable support for External Public Key Authentication plug-in
   --enable-fuzz           Build fuzzing. Not recommended for deployment.
   --enable-bundled-libtom       Force using bundled libtomcrypt/libtommath even if a system version exists.
@@ -5834,6 +5836,30 @@ fi
 
 		{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: Using shadow passwords if available" >&5
 printf "%s\n" "$as_me: Using shadow passwords if available" >&6;}
+
+
+fi
+
+
+# Check whether --enable-genhostkeys was given.
+if test ${enable_genhostkeys+y}
+then :
+  enableval=$enable_genhostkeys;
+		if test "x$enableval" = "xno"; then
+
+printf "%s\n" "#define DROPBEAR_DELAY_HOSTKEY 0" >>confdefs.h
+
+			{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: Disabling hostkey auto generation" >&5
+printf "%s\n" "$as_me: Disabling hostkey auto generation" >&6;}
+		else
+			{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: Enabling hostkey auto generation" >&5
+printf "%s\n" "$as_me: Enabling hostkey auto generation" >&6;}
+		fi
+
+else $as_nop
+
+		{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: Enabling hostkey auto generation" >&5
+printf "%s\n" "$as_me: Enabling hostkey auto generation" >&6;}
 
 
 fi

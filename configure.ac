@@ -350,6 +350,21 @@ AC_ARG_ENABLE(shadow,
 	]
 )
 
+AC_ARG_ENABLE(genhostkeys,
+	[  --disable-genhostkeys        Don't include hostkey auto generation e.g. -R option],
+	[
+		if test "x$enableval" = "xno"; then
+			AC_DEFINE(DROPBEAR_DELAY_HOSTKEY,0,Using hostkey auto generation)
+			AC_MSG_NOTICE(Disabling hostkey auto generation)
+		else
+			AC_MSG_NOTICE(Enabling hostkey auto generation)
+		fi
+	],
+	[
+		AC_MSG_NOTICE(Enabling hostkey auto generation)
+	]
+)
+
 AC_ARG_ENABLE(plugin,
 	[  --enable-plugin         Enable support for External Public Key Authentication plug-in],
 	[
